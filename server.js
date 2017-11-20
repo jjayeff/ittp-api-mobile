@@ -11,4 +11,4 @@ app.use(bodyParser.json())
 app.use('/api/Loans', loan)
 app.use('/api/Auth', auth)
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+app.listen(PORT)

@@ -14,14 +14,22 @@ router.post('/:citizen_id/accessTokens', async function (req, res) {
       if (await setAccessToken(token, data.accessToken)) {
         const result = await getCitizenId(token)
         res.status(200).send(result)
+      } else {
+        res.status(404).send('404 Not Found')
       }
     })
+  } else {
+    res.status(404).send('404 Not Found')
   }
 })
 
 router.get('/:accessToken/citizenId', async function (req, res) {
   const data = await getCitizenId(req.params.accessToken)
-  res.status(200).send(data);
+  if (data) {
+    res.status(200).send(data);
+  } else {
+    res.status(404).send('404 Not Found')
+  }
 })
 
 const getAccessToken = async (username, password) => {
