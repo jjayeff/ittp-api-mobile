@@ -59,15 +59,15 @@ router.post('/:accessTokens/setFb', async function (req, res) {
   } else {
     const path = `${API_SERVER}/api/Loans/citizen/${req.body.username}`
     request(path, async function (error, response, body) {
-      if (body === '[]') {
-        res.status(404).send('404 Not Found')
-      } else {
+      if (body !== '[]' && !error && response.statusCode === 200) {
         if (await fbInsert(req.body.accessToken, req.body.username, req.body.id)) {
           const result = await getCitizenId(req.body.accessToken)
-      res.status(200).send(result)
+          res.status(200).send(result)
         } else {
-      res.status(404).send('404 Not Found')
+          res.status(404).send('404 Not Found')
         }
+      } else {
+        res.status(404).send('404 Not Found')        
       }
     })
   }
