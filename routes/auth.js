@@ -3,7 +3,6 @@ import request from 'request'
 import md5 from 'md5'
 import connection from '../database'
 import { API_SERVER } from '../config'
-import { compose } from '../../ittp-user-mobile-app/node_modules/redux';
 
 const router = express.Router()
 
